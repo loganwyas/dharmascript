@@ -1,3 +1,4 @@
+from sys import argv
 from lark import Lark, Token, Tree
 
 false = "Gale"
@@ -293,12 +294,14 @@ def run_file(program):
 
 
 def main():
-    with open("main.dharma", "r") as f:
-        text = f.read()
-        try:
+    try:
+        if len(argv) < 2:
+            raiseException("A filename must be given as an argument.")
+        with open(argv[1], "r") as f:
+            text = f.read()
             run_file(text)
-        except Exception as e:
-            print(e)
+    except Exception as e:
+        print(e)
 
 
 if __name__ == '__main__':
