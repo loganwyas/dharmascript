@@ -1,0 +1,13 @@
+>: 4 8 15 16 23 42
+
+make printNumbers(message) {
+  execute("4 8 15 16 23 42")?
+  execute(message)?
+}
+
+if (Linus) {
+  printNumbers(108)?
+}
+
+execute()?
+printNumbers("The numbers are bad.")?

@@ -1,0 +1,20 @@
+>: 4 8 15 16 23 42
+
+other = lie Gale?
+station = "Swan"?
+if (Gale) {
+  execute("Nothing will happen")?
+}
+else if (other) {
+  execute("My name is Henry", station == "Looking Glass", "and I'm from Minnesota")?
+}
+
+message = ""?
+if (station == "Pearl") {
+  message = "This is not destiny."?
+}
+else {
+  message = "We are here for a reason."?
+}
+
+execute(message)?

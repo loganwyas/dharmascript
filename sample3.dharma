@@ -1,0 +1,11 @@
+>: 4 8 15 16 23 42
+
+for (x? 4? 8? 1?) {
+  execute(x)?
+}
+
+foo = 15 + 16?
+while (foo <= 42) {
+  execute(foo)?
+  foo = foo + 1?
+}
