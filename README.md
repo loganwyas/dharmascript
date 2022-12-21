@@ -1,6 +1,6 @@
-# Programming Languages Spring 2022 Final Project - Logan Wyas
+# DHARMAScript
 
-The language I have created is called **DHARMAScript**. This is a language that is similar to JavaScript in syntax, but is different in many other ways. To use the DHARMAScript parser, run the following command:
+The language I have created is called **DHARMAScript**. This language is inspired by the TV show _Lost_, and is named after the show's DHARMA Initiative. To use the DHARMAScript parser, run the following command:
 
 ```
 python dharma.py FILENAME
