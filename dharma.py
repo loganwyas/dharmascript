@@ -9,21 +9,21 @@ parser = Lark(r"""
     
     statement: for | single_line | if_statement | while
     
-    assignment: WORD "=" value
+    assignment: variable "=" value
     single_line: (function_call | assignment) "?"
     
     for: "for" "(" (variable "?" num "?" num "?" (num "?"?)?) ")" "{{" (statement)* "}}"
     
     while: "while" "(" value ")" "{{" (statement)* "}}"
     
-    function: "make" WORD "(" (WORD? | (WORD) ("," WORD)*) ")" "{{" (statement)* "}}"
-    function_call: WORD  "(" (value? | (value) ("," value)*) ")"
+    function: "make" variable "(" (variable? | (variable) ("," variable)*) ")" "{{" (statement)* "}}"
+    function_call: variable  "(" (value? | (value) ("," value)*) ")"
     
     if: "if" "(" value ")" "{{" (statement)* "}}"
     if_statement: if ("else " if)* ("else" "{{" (statement)* "}}")?
     
     value: num | string | bool | function_call | variable | calculation | "(" value ")"
-    variable: WORD
+    variable: WORD (WORD | "_" | "-" | num)*
     
     string: ESCAPED_STRING
     
@@ -92,14 +92,15 @@ def run_created_function(name):
 
 
 def create_function(t):
+    print(t)
     vals = t.children
-    name = vals[0].value
+    name = get_word_from_var(vals[0])
     if name in illegalNames:
         raiseException("Cannot use \"" + name + "\" as a function name.")
     i = 1
     args = []
-    while not type(vals[i]) == Tree:
-        args.append(vals[i].value)
+    while vals[i].data == "variable":
+        args.append(get_word_from_var(vals[i]))
         i += 1
     func = "lambda: run_created_function('" + name + "')"
     func_instructions[name] = vals[i:]
@@ -191,13 +192,19 @@ def get_backend_value(t):
         return val.children[0].value
     else:
         raiseException("Non-value was passed")
+        
+def get_word_from_var(t):
+    if t.data == "variable":
+        return t.children[0].value
+    else:
+        raiseException("Given bad variable")
 
 
 def assign_value(t):
     var = ""
     for i, line in enumerate(t.children):
         if i == 0:
-            var = line.value
+            var = get_word_from_var(line)
             if var in illegalNames:
                 raiseException(
                     "\"" + var + "\" cannot be used as a variable."
@@ -243,7 +250,7 @@ def run_instruction(t):
         args = []
         for i, val in enumerate(t.children):
             if i == 0:
-                func = val.value
+                func = get_word_from_var(val)
             else:
                 args.append(get_lang_value(t.children[i]))
         run_function(func, *tuple(args))

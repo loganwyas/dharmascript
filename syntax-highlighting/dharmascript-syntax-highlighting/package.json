@@ -1,0 +1,25 @@
+{
+  "name": "dharmascript-syntax-highlighting",
+  "displayName": "DHARMAScript Syntax Highlighting",
+  "description": "This extension highlights the syntax for the language DHARMAScript.",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.74.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "dharma",
+      "aliases": ["DHARMAScript", "dharma"],
+      "extensions": [".dharma"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "dharma",
+      "scopeName": "source.dharma",
+      "path": "./syntaxes/dharma.tmLanguage.json"
+    }]
+  }
+}

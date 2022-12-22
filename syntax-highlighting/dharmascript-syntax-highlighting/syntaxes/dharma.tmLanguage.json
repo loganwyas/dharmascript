@@ -1,0 +1,61 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "DHARMAScript",
+  "patterns": [
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#strings"
+    },
+    {
+      "include": "#booleans"
+    },
+    {
+      "include": "#header"
+    },
+    {
+      "include": "#declaration"
+    }
+  ],
+  "repository": {
+    "keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control",
+          "match": "if|while|for|else"
+        }
+      ]
+    },
+    "strings": {
+      "name": "string.quoted.double",
+      "begin": "\"",
+      "end": "\""
+    },
+    "booleans": {
+      "patterns": [
+        {
+          "name": "constant.language",
+          "match": "Linus|Gale|lie"
+        }
+      ]
+    },
+    "header": {
+      "patterns": [
+        {
+          "name": "support.class",
+          "match": ">: 4 8 15 16 23 42"
+        }
+      ]
+    },
+    "declaration": {
+      "patterns": [
+        {
+          "name": "storage.type",
+          "match": "make"
+        }
+      ]
+    }
+  },
+  "scopeName": "source.dharma"
+}
